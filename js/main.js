@@ -1,187 +1,128 @@
-// --- VARIABLES GLOBALES ---
 let productos = [];
-let carrito = [];
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-// --- CARGA DE DATOS DESDE JSON ---
+// Cargar productos desde JSON
 async function cargarProductos() {
-  try {
-    const respuesta = await fetch("data/productos.json");
-    productos = await respuesta.json();
-    mostrarProductos(productos);
-  } catch (error) {
-    document.getElementById("seccionProductos").innerHTML =
-      "<p>Error al cargar los productos.</p>";
-  }
+  const respuesta = await fetch("./data/productos.json");
+  productos = await respuesta.json();
+  mostrarProductos();
+  actualizarCarrito();
 }
 
-// --- MOSTRAR PRODUCTOS EN PANTALLA ---
-function mostrarProductos(lista) {
-  const contenedor = document.getElementById("seccionProductos");
+// Renderizar productos
+function mostrarProductos() {
+  const contenedor = document.getElementById("contenedorProductos");
   contenedor.innerHTML = "";
 
-  lista.forEach((producto) => {
+  productos.forEach((producto) => {
     const div = document.createElement("div");
-    div.className = "producto";
+    div.classList.add("col-md-4");
     div.innerHTML = `
-      <img src="${producto.imagen}" alt="${producto.nombre}">
-      <h3>${producto.nombre}</h3>
-      <p>Precio: $${producto.precio}</p>
-      <p>Stock disponible: ${producto.stock}</p>
-      <button id="btn${producto.id}">Agregar al carrito</button>
-    `;
+      <div class="card h-100 text-center">
+        <img src="./images/${producto.imagen}" class="card-img-top" alt="${producto.nombre}">
+        <div class="card-body">
+          <h5 class="card-title">${producto.nombre}</h5>
+          <p class="card-text">${producto.descripcion}</p>
+          <p class="fw-bold">$${producto.precio}</p>
+          <button class="btn btn-info" onclick="agregarAlCarrito(${producto.id})">Agregar al carrito</button>
+        </div>
+      </div>`;
     contenedor.appendChild(div);
-
-    const boton = document.getElementById(`btn${producto.id}`);
-    boton.addEventListener("click", () => agregarAlCarrito(producto.id));
   });
 }
 
-// --- AGREGAR AL CARRITO ---
-function agregarAlCarrito(idProducto) {
-  const producto = productos.find((p) => p.id === idProducto);
-  const enCarrito = carrito.find((item) => item.id === idProducto);
+// Agregar producto
+function agregarAlCarrito(id) {
+  const producto = productos.find((p) => p.id === id);
+  const itemEnCarrito = carrito.find((p) => p.id === id);
 
-  if (producto.stock === 0) {
-    mostrarMensaje("No hay stock disponible.");
-    return;
-  }
-
-  if (enCarrito) {
-    if (enCarrito.cantidad < producto.stock) {
-      enCarrito.cantidad++;
-    } else {
-      mostrarMensaje("No podés agregar más unidades de este producto.");
-      return;
-    }
+  if (itemEnCarrito) {
+    itemEnCarrito.cantidad++;
   } else {
     carrito.push({ ...producto, cantidad: 1 });
   }
 
-  producto.stock--;
   guardarCarrito();
-  actualizarContador();
-  mostrarMensaje("Producto agregado al carrito.");
+  actualizarCarrito();
+  mostrarCarrito();
 }
 
-// --- MOSTRAR MENSAJES EN PANTALLA ---
-function mostrarMensaje(texto) {
-  const mensaje = document.createElement("p");
-  mensaje.textContent = texto;
-  mensaje.style.backgroundColor = "#4fc3f7";
-  mensaje.style.color = "#000";
-  mensaje.style.padding = "0.5rem";
-  mensaje.style.borderRadius = "5px";
-  mensaje.style.textAlign = "center";
-  document.body.prepend(mensaje);
+// Renderizar carrito
+function mostrarCarrito() {
+  const carritoSection = document.getElementById("carritoSection");
+  const contenedor = document.getElementById("carrito");
+  carritoSection.style.display = carrito.length ? "block" : "none";
 
-  setTimeout(() => mensaje.remove(), 1500);
+  contenedor.innerHTML = `
+    <table class="table table-striped table-dark">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        ${carrito
+          .map(
+            (p) => `
+          <tr>
+            <td>${p.nombre}</td>
+            <td>$${p.precio}</td>
+            <td>${p.cantidad}</td>
+            <td>$${p.precio * p.cantidad}</td>
+            <td><button class="btn btn-danger btn-sm" onclick="eliminarProducto(${
+              p.id
+            })">X</button></td>
+          </tr>`
+          )
+          .join("")}
+      </tbody>
+    </table>
+    <h4 class="text-end mt-3">Total: $${calcularTotal()}</h4>`;
 }
 
-// --- GUARDAR Y CARGAR DEL STORAGE ---
+// Eliminar producto
+function eliminarProducto(id) {
+  carrito = carrito.filter((p) => p.id !== id);
+  guardarCarrito();
+  actualizarCarrito();
+  mostrarCarrito();
+}
+
+// Vaciar carrito
+document.getElementById("vaciarCarrito").addEventListener("click", () => {
+  carrito = [];
+  guardarCarrito();
+  actualizarCarrito();
+  mostrarCarrito();
+});
+
+// Finalizar compra
+document.getElementById("finalizarCompra").addEventListener("click", () => {
+  if (carrito.length === 0) {
+    alert("El carrito está vacío.");
+    return;
+  }
+  alert("¡Gracias por tu compra!");
+  carrito = [];
+  guardarCarrito();
+  actualizarCarrito();
+  mostrarCarrito();
+});
+
+// Guardar y actualizar
 function guardarCarrito() {
   localStorage.setItem("carrito", JSON.stringify(carrito));
 }
-
-function cargarCarrito() {
-  const datos = localStorage.getItem("carrito");
-  if (datos) {
-    carrito = JSON.parse(datos);
-    actualizarContador();
-  }
+function calcularTotal() {
+  return carrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
+}
+function actualizarCarrito() {
+  document.getElementById("cantidadCarrito").textContent = carrito.length;
 }
 
-// --- MOSTRAR CARRITO ---
-function mostrarCarrito() {
-  const seccion = document.getElementById("seccionCarrito");
-  seccion.classList.toggle("oculto");
-  seccion.innerHTML = "";
-
-  if (carrito.length === 0) {
-    seccion.innerHTML = "<p>El carrito está vacío.</p>";
-    return;
-  }
-
-  const tabla = document.createElement("table");
-  tabla.className = "tabla-carrito";
-  tabla.innerHTML = `
-    <tr>
-      <th>Producto</th>
-      <th>Precio</th>
-      <th>Cantidad</th>
-      <th>Subtotal</th>
-      <th>Acción</th>
-    </tr>
-  `;
-
-  let total = 0;
-
-  carrito.forEach((item) => {
-    const fila = document.createElement("tr");
-    fila.innerHTML = `
-      <td>${item.nombre}</td>
-      <td>$${item.precio}</td>
-      <td>${item.cantidad}</td>
-      <td>$${item.precio * item.cantidad}</td>
-      <td><button class="eliminar" data-id="${item.id}">X</button></td>
-    `;
-    tabla.appendChild(fila);
-    total += item.precio * item.cantidad;
-  });
-
-  seccion.appendChild(tabla);
-
-  const totalParrafo = document.createElement("p");
-  totalParrafo.textContent = `Total: $${total}`;
-  seccion.appendChild(totalParrafo);
-
-  const botonVaciar = document.createElement("button");
-  botonVaciar.textContent = "Vaciar carrito";
-  botonVaciar.className = "vaciar";
-  botonVaciar.addEventListener("click", vaciarCarrito);
-  seccion.appendChild(botonVaciar);
-
-  const botonesEliminar = seccion.querySelectorAll(".eliminar");
-  botonesEliminar.forEach((btn) =>
-    btn.addEventListener("click", (e) => eliminarDelCarrito(e))
-  );
-}
-
-// --- ELIMINAR UN PRODUCTO DEL CARRITO ---
-function eliminarDelCarrito(e) {
-  const id = Number(e.target.dataset.id);
-  const index = carrito.findIndex((item) => item.id === id);
-  if (index !== -1) {
-    const item = carrito[index];
-    const producto = productos.find((p) => p.id === id);
-    producto.stock += item.cantidad;
-    carrito.splice(index, 1);
-    guardarCarrito();
-    mostrarCarrito();
-    actualizarContador();
-  }
-}
-
-// --- VACIAR CARRITO ---
-function vaciarCarrito() {
-  carrito.forEach((item) => {
-    const producto = productos.find((p) => p.id === item.id);
-    producto.stock += item.cantidad;
-  });
-  carrito = [];
-  guardarCarrito();
-  mostrarCarrito();
-  actualizarContador();
-}
-
-// --- CONTADOR DEL CARRITO ---
-function actualizarContador() {
-  const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
-  document.getElementById("contadorCarrito").textContent = totalItems;
-}
-
-// --- INICIALIZACIÓN ---
-document
-  .getElementById("btnVerCarrito")
-  .addEventListener("click", mostrarCarrito);
-cargarCarrito();
+// Inicializar
 cargarProductos();

@@ -1,99 +1,68 @@
 * {
-  box-sizing: border-box;
-  margin: 0;
   padding: 0;
+  margin: 0;
+}
+
+:root {
+  --color-principal: #4fc3f7;
+  --fondo-oscuro: #0f0f0f;
+  --texto-claro: #f5f5f5;
 }
 
 body {
-  font-family: system-ui, sans-serif;
-  background-color: #121212;
-  color: #fff;
-  line-height: 1.6;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background-color: var(--fondo-oscuro);
+  color: var(--texto-claro);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
   background-color: #000;
-  padding: 1rem;
-  text-align: center;
 }
 
-h1 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-nav button {
-  padding: 0.5rem 1rem;
-  border: none;
-  background-color: #4fc3f7;
-  color: #000;
-  border-radius: 5px;
-  cursor: pointer;
+.logo {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--color-principal);
 }
 
 main {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 1rem;
+  flex: 1;
 }
 
-#seccionProductos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
+.card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s;
+  height: 100%;
+}
+.card:hover {
+  transform: scale(1.03);
 }
 
-.producto {
-  background-color: #1e1e1e;
-  border: 1px solid #333;
-  padding: 1rem;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.producto img {
-  max-width: 100%;
-  border-radius: 5px;
-  margin-bottom: 1rem;
-}
-
-.producto button {
-  background-color: #4fc3f7;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#seccionCarrito {
-  background-color: #1e1e1e;
-  padding: 1rem;
-  margin-top: 2rem;
+.card img {
   border-radius: 8px;
 }
 
-.oculto {
+.btn {
+  border-radius: 8px;
+}
+
+#carritoSection {
   display: none;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 2rem;
 }
 
-.tabla-carrito {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-}
-
-.tabla-carrito th,
-.tabla-carrito td {
-  border: 1px solid #444;
-  padding: 0.5rem;
-  text-align: center;
-}
-
-button.vaciar {
-  background-color: #f44336;
+.table {
   color: white;
-  border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
+}
+
+footer {
+  background-color: #000;
+  color: #ccc;
+  padding: 1.2rem;
 }

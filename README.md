@@ -67,7 +67,7 @@ Se simula el flujo completo de una compra, desde la selección de productos hast
   - `js/main.js`
   - `data/productos.json`
   - `README.md`
-- Subir a **Google Drive** o **GitHub (preferido)**.
+- Subir a **GitHub**.
 
 ---
 
@@ -85,14 +85,13 @@ Se simula el flujo completo de una compra, desde la selección de productos hast
 
 ## 🧑‍💻 Autoría
 
-**Nombre y Apellido:** Laura [Tu Apellido]  
+**Nombre y Apellido:** Laura Posada  
 **Curso:** JavaScript  
-**Comisión:** [Número de comisión]  
-**Profesor/a:** [Nombre del docente]  
+**Comisión:** 80895
+**Profesor/a:** Fernado Moyano
 **Año:** 2025
 
-**Repositorio GitHub:** [agregar enlace]  
-**Carpeta Drive:** [agregar enlace]
+**Repositorio GitHub:** https://github.com/LPosi/ProyectoFinal_Posada
 
 ---
 
