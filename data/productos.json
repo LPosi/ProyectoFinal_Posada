@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "nombre": "Lámpara Flor de Loto",
+    "descripcion": "Inspirada en la semilla de la vida. Luz cálida y elegante.",
+    "precio": 12000,
+    "stock": 8,
+    "imagen": "lampara_loto.png"
+  },
+  {
+    "id": 2,
+    "nombre": "Lámpara Ondas I",
+    "descripcion": "Diseño fluido y orgánico. Ideal para escritorio o sala.",
+    "precio": 10500,
+    "stock": 12,
+    "imagen": "lampara_ondas1.png"
+  },
+  {
+    "id": 3,
+    "nombre": "Lámpara Ondas II",
+    "descripcion": "Modelo complementario con un toque moderno y artesanal.",
+    "precio": 11000,
+    "stock": 10,
+    "imagen": "lampara_ondas2.png"
+  },
+  {
+    "id": 4,
+    "nombre": "Lámpara Hexagonal",
+    "descripcion": "Geometría perfecta en 3D. Luz blanca neutra.",
+    "precio": 9500,
+    "stock": 6,
+    "imagen": "lampara_hexagonal.png"
+  }
+]
+📘 Uso:
+Este archivo se carga con fetch("./data/productos.json") para renderizar el catálogo principal.
+Incluye el campo stock, útil si querés mostrar disponibilidad o evitar compras cuando se agota.
+
+🗂️ data/clientes.json
+👉 Este archivo simula una base mínima de clientes registrados (para mostrar precarga de datos en formularios o personalización).
+
+json
+Copiar código
+[
+  {
+    "id": 1,
+    "nombre": "Laura Pérez",
+    "email": "laura.perez@cubolamps.com",
+    "telefono": "+54 9 11 1234 5678",
+    "direccion": "Av. del Libertador 1234, CABA"
+  },
+  {
+    "id": 2,
+    "nombre": "Carlos Gómez",
+    "email": "carlos.gomez@gmail.com",
+    "telefono": "+54 9 11 2345 6789",
+    "direccion": "Belgrano 456, Rosario"
+  },
+  {
+    "id": 3,
+    "nombre": "María Torres",
+    "email": "maria.torres@hotmail.com",
+    "telefono": "+54 9 11 3456 7890",
+    "direccion": "Calle 12 N° 567, La Plata"
+  }
+]
