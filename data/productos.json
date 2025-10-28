@@ -3,32 +3,32 @@
     "id": 1,
     "nombre": "Lámpara Flor de Loto",
     "descripcion": "Inspirada en la semilla de la vida. Luz cálida y elegante.",
-    "precio": 12000,
+    "precio": 110000,
     "stock": 8,
-    "imagen": "lampara_loto.png"
+    "imagen": "lampara_1.2.PNG"
   },
   {
     "id": 2,
     "nombre": "Lámpara Ondas I",
     "descripcion": "Diseño fluido y orgánico. Ideal para escritorio o sala.",
-    "precio": 10500,
+    "precio": 66000,
     "stock": 12,
-    "imagen": "lampara_ondas1.png"
+    "imagen": "lampara_ondas_I.PNG"
   },
   {
     "id": 3,
     "nombre": "Lámpara Ondas II",
     "descripcion": "Modelo complementario con un toque moderno y artesanal.",
-    "precio": 11000,
+    "precio": 28000,
     "stock": 10,
-    "imagen": "lampara_ondas2.png"
+    "imagen": "Captura.PNG"
   },
   {
     "id": 4,
     "nombre": "Lámpara Hexagonal",
     "descripcion": "Geometría perfecta en 3D. Luz blanca neutra.",
-    "precio": 9500,
+    "precio": 30000,
     "stock": 6,
-    "imagen": "lampara_hexagonal.png"
+    "imagen": "lampara_3D_1.jpg"
   }
 ]

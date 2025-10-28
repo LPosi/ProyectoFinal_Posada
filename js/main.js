@@ -48,7 +48,7 @@ const renderizarProductos = () => {
     contenedor.appendChild(tarjeta);
   });
 
-  // Delegación de eventos (buena práctica)
+  // Delegación de eventos
   contenedor.addEventListener("click", (e) => {
     if (e.target.matches("button[data-id]")) {
       const id = Number(e.target.dataset.id);
