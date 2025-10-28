@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "nombre": "Lámpara Flor de Loto",
+    "precio": 7500,
+    "stock": 10,
+    "imagen": "images/lampara_1.PNG"
+  },
+  {
+    "id": 2,
+    "nombre": "Lámpara Ondas I",
+    "precio": 5200,
+    "stock": 8,
+    "imagen": "images/lampara_ondas_I.PNG"
+  },
+  {
+    "id": 3,
+    "nombre": "Lámpara Ondas II",
+    "precio": 5800,
+    "stock": 5,
+    "imagen": "images/lampara_ondas_II.PNG"
+  }
+]
