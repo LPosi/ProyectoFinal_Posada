@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "nombre": "Laura Pérez",
+    "email": "laura.perez@cubolamps.com",
+    "telefono": "+54 9 11 1234 5678",
+    "direccion": "Av. del Libertador 1234, CABA"
+  },
+  {
+    "id": 2,
+    "nombre": "Carlos Gómez",
+    "email": "carlos.gomez@example.com",
+    "telefono": "+54 9 11 2345 6789",
+    "direccion": "Belgrano 456, Rosario"
+  },
+  {
+    "id": 3,
+    "nombre": "María Torres",
+    "email": "maria.torres@example.com",
+    "telefono": "+54 9 11 3456 7890",
+    "direccion": "Calle 12 N° 567, La Plata"
+  }
+]

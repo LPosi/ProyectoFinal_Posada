@@ -32,35 +32,3 @@
     "imagen": "lampara_hexagonal.png"
   }
 ]
-📘 Uso:
-Este archivo se carga con fetch("./data/productos.json") para renderizar el catálogo principal.
-Incluye el campo stock, útil si querés mostrar disponibilidad o evitar compras cuando se agota.
-
-🗂️ data/clientes.json
-👉 Este archivo simula una base mínima de clientes registrados (para mostrar precarga de datos en formularios o personalización).
-
-json
-Copiar código
-[
-  {
-    "id": 1,
-    "nombre": "Laura Pérez",
-    "email": "laura.perez@cubolamps.com",
-    "telefono": "+54 9 11 1234 5678",
-    "direccion": "Av. del Libertador 1234, CABA"
-  },
-  {
-    "id": 2,
-    "nombre": "Carlos Gómez",
-    "email": "carlos.gomez@gmail.com",
-    "telefono": "+54 9 11 2345 6789",
-    "direccion": "Belgrano 456, Rosario"
-  },
-  {
-    "id": 3,
-    "nombre": "María Torres",
-    "email": "maria.torres@hotmail.com",
-    "telefono": "+54 9 11 3456 7890",
-    "direccion": "Calle 12 N° 567, La Plata"
-  }
-]
